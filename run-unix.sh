@@ -1,5 +1,5 @@
 #!/bin/bash
-CONTAINER_NAME="my-undertone-booking-app"
+CONTAINER_NAME="undertone-booking-web"
 IMAGE_NAME="maven:3.9.6-eclipse-temurin-21"
 PORT_MAPPING="8080:8080"
 MVN_COMMAND="spring-boot:run"

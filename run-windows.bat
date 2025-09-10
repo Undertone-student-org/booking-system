@@ -1,5 +1,5 @@
 @echo off
-set CONTAINER_NAME=my-undertone-booking-app
+set CONTAINER_NAME=undertone-booking-web
 set IMAGE_NAME=maven:3.9.6-eclipse-temurin-21
 set PORT_MAPPING=8080:8080
 set MVN_COMMAND=spring-boot:run
