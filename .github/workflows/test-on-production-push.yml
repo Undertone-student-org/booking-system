@@ -1,0 +1,29 @@
+name: Run Unit Tests on Production Push
+
+on:
+
+  pull_request:
+    branches:
+      - Production
+      - main
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fail if not from Pre-production
+        run: |
+          if [[ "$GITHUB_HEAD_REF" != "Pre-production" ]]; then
+            echo "This PR is not from Pre-production branch. Failing the workflow.";
+            exit 1;
+          fi
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Build and run tests
+        run: mvn test
