@@ -18,4 +18,7 @@ docker run ^
     %IMAGE_NAME% ^
     %MVN_COMMAND%
 
-echo "Container is starting. Press Ctrl+C to stop."
+docker stop %CONTAINER_NAME% >nul 2>&1
+docker rm %CONTAINER_NAME% >nul 2>&1
+
+echo Container is stopped and removed.
