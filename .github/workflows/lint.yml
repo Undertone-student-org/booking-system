@@ -19,17 +19,26 @@ jobs:
           DISABLE_GITHUB_STATUS: true
           OUTPUT_DETAILS: detailed
           DISABLE_ERRORS: true
+          CREATE_LOG_FILE: true
           LOG_FILE: /tmp/super-linter.log
       - name: Convert Super-Linter logs to Markdown
         run: |
           LOGFILE="/tmp/super-linter.log"
           MDREPORT="super-linter-report.md"
-          echo "# Super-Linter Report" > "$MDREPORT"
-          if [ -f "$LOGFILE" ]; then
-            cat "$LOGFILE" >> "$MDREPORT"
-          else
-            echo "Super-Linter log file not found." >> "$MDREPORT"
-          fi
+            echo "# Super-Linter Report" > "$MDREPORT"
+            echo "| Linter | Status |" >> "$MDREPORT"
+            echo "|--------|--------|" >> "$MDREPORT"
+            if [ -f "$LOGFILE" ]; then
+              grep -E "(Linting|was|PASSED|FAILED)" "$LOGFILE" | awk '
+                /Linting/ {split($0,a,": "); linter=a[2]; next}
+                /PASSED/ {print "| " linter " | ✅ Passed |"}
+                /FAILED/ {print "| " linter " | ❌ Failed |"}
+              ' >> "$MDREPORT"
+              echo -e "\n## Full Super-Linter Log\n" >> "$MDREPORT"
+              cat "$LOGFILE" >> "$MDREPORT"
+            else
+              echo "Super-Linter log file not found." >> "$MDREPORT"
+            fi
       - name: Insert Super-Linter report into README.md
         run: |
           REPORT=$(cat super-linter-report.md)
@@ -50,8 +59,6 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          cp super-linter-report.md lint-report.md
-          git add lint-report.md
           git add README.md
           git commit -m "Update Super-Linter report [skip ci]" || echo "No changes to commit"
           git push
