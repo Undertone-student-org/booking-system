@@ -2,9 +2,9 @@ name: CI Unit Tests
 on:
   workflow_call:
   push:
-    branches: [ main, pre-production ]
+    branches: [ pre-production ]
   pull_request:
-    branches: [ main, pre-production, production ]
+    branches: [ pre-production, production ]
 jobs:
   test-frontend:
     runs-on: ubuntu-latest
