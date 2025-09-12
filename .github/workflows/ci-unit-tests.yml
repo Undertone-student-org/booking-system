@@ -1,5 +1,6 @@
 name: CI Unit Tests
 on:
+  workflow_dispatch:
   workflow_call:
   push:
     branches: [ pre-production ]
