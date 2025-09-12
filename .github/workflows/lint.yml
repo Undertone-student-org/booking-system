@@ -24,6 +24,8 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y jq
       - name: Convert Super-Linter JSON output to Markdown
         run: |
+            echo "==== Workspace file/folder listing ===="
+            find . | sort
             REPORT_DIR="super-linter-output/super-linter"
             MDREPORT="super-linter-report.md"
             echo "# Super-Linter Report" > "$MDREPORT"
