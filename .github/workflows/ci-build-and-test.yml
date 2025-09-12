@@ -8,8 +8,14 @@ on:
   pull_request:
     branches: [ pre-production, production ]
 jobs:
+  lint-all:
+    uses: ./.github/workflows/lint.yml
+    secrets:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   build-frontend-image:
     runs-on: ubuntu-latest
+    needs: lint-all
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -25,6 +31,7 @@ jobs:
 
   build-backend-image:
     runs-on: ubuntu-latest
+    needs: lint-all
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -67,3 +74,22 @@ jobs:
         run: docker load -i backend-test.tar
       - name: Run backend unit tests in container
         run: docker run --rm backend-test mvn test
+
+  test-docker-compose:
+    runs-on: ubuntu-latest
+    needs:
+      - test-frontend
+      - test-backend
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Install Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose
+      - name: Start services with Docker Compose
+        run: docker-compose -f compose.yml up -d
+      - name: Check running containers
+        run: docker ps
+      - name: Stop services
+        run: docker-compose -f compose.yml down
