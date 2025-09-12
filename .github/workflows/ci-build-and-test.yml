@@ -9,8 +9,6 @@ on:
 jobs:
   lint-all:
     uses: ./.github/workflows/lint.yml
-    secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build-frontend-image:
     runs-on: ubuntu-latest
