@@ -2,7 +2,9 @@ name: Build and Test in Docker Containers
 on:
   workflow_dispatch:
   push:
-    branches: [ pre-production ]
+    branches: 
+      - pre-production
+      - 'feature/*'
   pull_request:
     branches: [ pre-production, production ]
 jobs:
