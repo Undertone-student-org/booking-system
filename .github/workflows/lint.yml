@@ -22,14 +22,16 @@ jobs:
           LOGFILE="/tmp/lint/super-linter.log"
           MDREPORT="super-linter-report.md"
           echo "# Super-Linter Report" > "$MDREPORT"
-          for linter in CHECKOV CSS DOCKERFILE_HADOLINT GITHUB_ACTIONS GITLEAKS GOOGLE_JAVA_FORMAT HTML JAVA JAVASCRIPT_ES JAVASCRIPT_PRETTIER JAVASCRIPT_STANDARD JSCPD JSON MARKDOWN NATURAL_LANGUAGE XML YAML; do
-            echo "<details><summary>$linter</summary>" >> "$MDREPORT"
-            grep -A 20 "$linter" "$LOGFILE" | sed 's/^/    /' >> "$MDREPORT"
-            echo "</details>" >> "$MDREPORT"
-          done
-      - name: Upload Super-Linter Markdown report
+          if [ -f "$LOGFILE" ]; then
+            awk '/Command output for/{flag=1;next}/^------$/{flag=0}flag' "$LOGFILE" >> "$MDREPORT"
+          else
+            echo "Super-Linter log file not found." >> "$MDREPORT"
+          fi
+      - name: Upload Super-Linter Markdown report (raw)
         uses: actions/upload-artifact@v4
         with:
-          name: super-linter-markdown-report
+          name: super-linter-markdown-report.md
           path: super-linter-report.md
+          if-no-files-found: error
+          retention-days: 7
 
