@@ -33,3 +33,12 @@ src/main/resources/static/*
 src/main/resources/static
 
 data/*
+
+
+# Ignore IDE specific files
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+*.swp
