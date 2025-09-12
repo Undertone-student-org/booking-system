@@ -23,6 +23,13 @@
 hs_err_pid*
 replay_pid*
 
-target/
+target/*
+target
 
-src/main/resources/static/
+front-end-app/dist
+front-end-app/dist/*
+
+src/main/resources/static/*
+src/main/resources/static
+
+data/*
