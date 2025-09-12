@@ -31,3 +31,4 @@ jobs:
         with:
           name: super-linter-markdown-report
           path: super-linter-report.md
+
