@@ -20,11 +20,10 @@ jobs:
             OUTPUT_DETAILS: detailed
             DISABLE_ERRORS: true
             CREATE_LOG_FILE: true
-            LOG_FILE: "super-linter.log"
+            LOG_FILE: "/tmp/super-linter.log"
       - name: Convert Super-Linter logs to Markdown
         run: |
-            chmod 644 super-linter.log
-            LOGFILE="super-linter.log"
+            LOGFILE="/tmp/super-linter.log"
             MDREPORT="super-linter-report.md"
             echo "# Super-Linter Report" > "$MDREPORT"
             echo "| Linter | Status |" >> "$MDREPORT"
