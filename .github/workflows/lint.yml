@@ -7,8 +7,6 @@ jobs:
   super-linter:
     runs-on: ubuntu-latest
     steps:
-      - name: Ensure logs directory exists
-        run: mkdir -p logs
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
@@ -21,34 +19,35 @@ jobs:
             DISABLE_GITHUB_STATUS: true
             OUTPUT_DETAILS: detailed
             DISABLE_ERRORS: true
-            CREATE_LOG_FILE: true
-            LOG_FILE: "logs/super-linter.log"
-      - name: Convert Super-Linter logs to Markdown
+            SAVE_SUPER_LINTER_OUTPUT: true
+      - name: Install jq for JSON parsing
+        run: sudo apt-get update && sudo apt-get install -y jq
+      - name: Convert Super-Linter JSON output to Markdown
         run: |
-            LOGFILE="logs/super-linter.log"
+            REPORT_DIR="super-linter-output/super-linter"
             MDREPORT="super-linter-report.md"
             echo "# Super-Linter Report" > "$MDREPORT"
             echo "| Linter | Status |" >> "$MDREPORT"
             echo "|--------|--------|" >> "$MDREPORT"
-            if [ -f "$LOGFILE" ]; then
-                grep -E "(Linting|was|PASSED|FAILED)" "$LOGFILE" | awk '
-                /Linting/ {split($0,a,": "); linter=a[2]; next}
-                /PASSED/ {print "| " linter " | ✅ Passed |"}
-                /FAILED/ {print "| " linter " | ❌ Failed |"}
-                ' >> "$MDREPORT"
-                echo -e "\n## Full Super-Linter Log\n" >> "$MDREPORT"
-                cat "$LOGFILE" >> "$MDREPORT"
-            else
-                echo "Super-Linter log file not found." >> "$MDREPORT"
-            fi
+            for json in $REPORT_DIR/*.json; do
+                linter=$(basename "$json" .json)
+                status=$(jq -r '.status' "$json")
+                if [ "$status" = "success" ]; then
+                echo "| $linter | ✅ Passed |" >> "$MDREPORT"
+                else
+                echo "| $linter | ❌ Failed |" >> "$MDREPORT"
+                echo "#### $linter errors" >> "$MDREPORT"
+                jq -r '.errors[] | "* File: \(.file) - \(.message)"' "$json" >> "$MDREPORT"
+                fi
+            done
       - name: Insert Super-Linter report into README.md
         run: |
             REPORT=$(cat super-linter-report.md)
             awk -v report="$REPORT" '
-            BEGIN {in_section=0}
-            /<!-- SUPER_LINTER_REPORT_START -->/ {print; print report; in_section=1; next}
-            /<!-- SUPER_LINTER_REPORT_END -->/ {in_section=0}
-            !in_section {print}
+                BEGIN {in_section=0}
+                /<!-- SUPER_LINTER_REPORT_START -->/ {print; print report; in_section=1; next}
+                /<!-- SUPER_LINTER_REPORT_END -->/ {in_section=0}
+                !in_section {print}
             ' README.md > README.tmp && mv README.tmp README.md
       - name: Upload Super-Linter Markdown report (raw)
         uses: actions/upload-artifact@v4
@@ -64,5 +63,3 @@ jobs:
             git add README.md
             git commit -m "Update Super-Linter report [skip ci]" || echo "No changes to commit"
             git push
-            
-
