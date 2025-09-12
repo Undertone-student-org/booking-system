@@ -4,7 +4,6 @@ on:
   push:
     branches: 
       - pre-production
-      - 'feature/*'
   pull_request:
     branches: [ pre-production, production ]
 jobs:
