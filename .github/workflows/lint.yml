@@ -16,8 +16,18 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DISABLE_GITHUB_STATUS: true
           OUTPUT_DETAILS: detailed
-      - name: Upload Super-Linter report
+      - name: Convert Super-Linter logs to Markdown
+        run: |
+          LOGFILE="/tmp/lint/super-linter.log"
+          MDREPORT="super-linter-report.md"
+          echo "# Super-Linter Report" > "$MDREPORT"
+          for linter in CHECKOV CSS DOCKERFILE_HADOLINT GITHUB_ACTIONS GITLEAKS GOOGLE_JAVA_FORMAT HTML JAVA JAVASCRIPT_ES JAVASCRIPT_PRETTIER JAVASCRIPT_STANDARD JSCPD JSON MARKDOWN NATURAL_LANGUAGE XML YAML; do
+            echo "<details><summary>$linter</summary>" >> "$MDREPORT"
+            grep -A 20 "$linter" "$LOGFILE" | sed 's/^/    /' >> "$MDREPORT"
+            echo "</details>" >> "$MDREPORT"
+          done
+      - name: Upload Super-Linter Markdown report
         uses: actions/upload-artifact@v4
         with:
-          name: super-linter-report
-          path: super-linter.report.json
+          name: super-linter-markdown-report
+          path: super-linter-report.md
