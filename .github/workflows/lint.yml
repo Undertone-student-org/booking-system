@@ -23,6 +23,7 @@ jobs:
             LOG_FILE: "super-linter.log"
       - name: Convert Super-Linter logs to Markdown
         run: |
+            chmod 644 super-linter.log
             LOGFILE="super-linter.log"
             MDREPORT="super-linter-report.md"
             echo "# Super-Linter Report" > "$MDREPORT"
