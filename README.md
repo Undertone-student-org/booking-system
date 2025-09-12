@@ -2,9 +2,8 @@
 
 <!-- SUPER_LINTER_REPORT_START -->
 # Super-Linter Report
-| Linter | Status |
-|--------|--------|
-Super-Linter log file not found.
+## Raw Super-Linter Output
+Super-Linter output file not found.
 <!-- SUPER_LINTER_REPORT_END -->
 
 <!-- TEST_RESULTS_START -->
