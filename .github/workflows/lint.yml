@@ -20,13 +20,14 @@ jobs:
             OUTPUT_DETAILS: detailed
             DISABLE_ERRORS: true
             SAVE_SUPER_LINTER_OUTPUT: true
+            SUPER_LINTER_OUTPUT_DIRECTORY_NAME: "."
       - name: Install jq for JSON parsing
         run: sudo apt-get update && sudo apt-get install -y jq
       - name: Convert Super-Linter JSON output to Markdown
         run: |
             echo "==== Workspace file/folder listing ===="
             find . | sort
-            REPORT_DIR="${DEFAULT_WORKSPACE}/${SUPER_LINTER_OUTPUT_DIRECTORY_NAME}/super-linter"
+            REPORT_DIR="./super-linter"
             MDREPORT="super-linter-report.md"
             echo "# Super-Linter Report" > "$MDREPORT"
             echo "| Linter | Status |" >> "$MDREPORT"
