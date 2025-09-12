@@ -25,24 +25,17 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y jq
       - name: Convert Super-Linter JSON output to Markdown
         run: |
-            echo "==== Workspace file/folder listing ===="
-            find . | sort
-            REPORT_DIR="./super-linter"
-            MDREPORT="super-linter-report.md"
-            echo "# Super-Linter Report" > "$MDREPORT"
-            echo "| Linter | Status |" >> "$MDREPORT"
-            echo "|--------|--------|" >> "$MDREPORT"
-            for json in $REPORT_DIR/*.json; do
-                linter=$(basename "$json" .json)
-                status=$(jq -r '.status' "$json")
-                if [ "$status" = "success" ]; then
-                echo "| $linter | ✅ Passed |" >> "$MDREPORT"
-                else
-                echo "| $linter | ❌ Failed |" >> "$MDREPORT"
-                echo "#### $linter errors" >> "$MDREPORT"
-                jq -r '.errors[] | "* File: \(.file) - \(.message)"' "$json" >> "$MDREPORT"
-                fi
-            done
+              echo "==== Workspace file/folder listing ===="
+              find . | sort
+              REPORT_FILE="./super-linter"
+              MDREPORT="super-linter-report.md"
+              echo "# Super-Linter Report" > "$MDREPORT"
+              echo "## Raw Super-Linter Output" >> "$MDREPORT"
+              if [ -f "$REPORT_FILE" ]; then
+                cat "$REPORT_FILE" >> "$MDREPORT"
+              else
+                echo "Super-Linter output file not found." >> "$MDREPORT"
+              fi
       - name: Insert Super-Linter report into README.md
         run: |
             REPORT=$(cat super-linter-report.md)
