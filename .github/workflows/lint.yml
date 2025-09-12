@@ -2,7 +2,7 @@ name: Lint Codebase
 permissions:
   contents: write
 on:
-  workflow_call:
+    workflow_call:
 jobs:
   super-linter:
     runs-on: ubuntu-latest
@@ -21,41 +21,10 @@ jobs:
             DISABLE_ERRORS: true
             SAVE_SUPER_LINTER_OUTPUT: true
             SUPER_LINTER_OUTPUT_DIRECTORY_NAME: "."
-      - name: Install jq for JSON parsing
-        run: sudo apt-get update && sudo apt-get install -y jq
-      - name: Convert Super-Linter JSON output to Markdown
-        run: |
-              echo "==== Workspace file/folder listing ===="
-              find . | sort
-              REPORT_FILE="./super-linter"
-              MDREPORT="super-linter-report.md"
-              echo "# Super-Linter Report" > "$MDREPORT"
-              echo "## Raw Super-Linter Output" >> "$MDREPORT"
-              if [ -f "$REPORT_FILE" ]; then
-                cat "$REPORT_FILE" >> "$MDREPORT"
-              else
-                echo "Super-Linter output file not found." >> "$MDREPORT"
-              fi
-      - name: Insert Super-Linter report into README.md
-        run: |
-            REPORT=$(cat super-linter-report.md)
-            awk -v report="$REPORT" '
-                BEGIN {in_section=0}
-                /<!-- SUPER_LINTER_REPORT_START -->/ {print; print report; in_section=1; next}
-                /<!-- SUPER_LINTER_REPORT_END -->/ {in_section=0}
-                !in_section {print}
-            ' README.md > README.tmp && mv README.tmp README.md
-      - name: Upload Super-Linter Markdown report (raw)
+      - name: Upload Super-Linter output file
         uses: actions/upload-artifact@v4
         with:
-            name: super-linter-markdown-report.md
-            path: super-linter-report.md
+            name: super-linter-output
+            path: ./super-linter
             if-no-files-found: error
             retention-days: 7
-      - name: Commit Super-Linter Markdown report to repo
-        run: |
-            git config --global user.name "github-actions[bot]"
-            git config --global user.email "github-actions[bot]@users.noreply.github.com"
-            git add README.md
-            git commit -m "Update Super-Linter report [skip ci]" || echo "No changes to commit"
-            git push
