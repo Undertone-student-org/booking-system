@@ -1,0 +1,23 @@
+
+services:
+
+  # Web application service
+  webapp:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql_db
+
+  # Database service
+  mysql_db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: booking_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data:/var/lib/mysql
