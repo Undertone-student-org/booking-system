@@ -1,4 +1,4 @@
-package com.undertone.demo;
+package com.undertone.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
