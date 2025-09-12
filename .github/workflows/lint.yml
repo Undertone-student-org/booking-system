@@ -6,6 +6,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Run Super-Linter
         uses: super-linter/super-linter@v6
         env:
           VALIDATE_ALL_CODEBASE: true
