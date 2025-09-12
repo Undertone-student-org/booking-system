@@ -16,7 +16,7 @@ jobs:
       - name: Save frontend image as artifact
         run: docker save frontend-test -o frontend-test.tar
       - name: Upload frontend image artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: frontend-test-image
           path: frontend-test.tar
@@ -31,7 +31,7 @@ jobs:
       - name: Save backend image as artifact
         run: docker save backend-test -o backend-test.tar
       - name: Upload backend image artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: backend-test-image
           path: backend-test.tar
@@ -43,7 +43,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Download frontend image artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: frontend-test-image
       - name: Load frontend image
@@ -58,7 +58,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Download backend image artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: backend-test-image
       - name: Load backend image
