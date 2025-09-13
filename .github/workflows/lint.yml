@@ -20,9 +20,9 @@ jobs:
             OUTPUT_DETAILS: detailed
             DISABLE_ERRORS: true
             SAVE_SUPER_LINTER_OUTPUT: true
-      - name: Generate Super-Linter Markdown summary
+      - name: Generate Clean Super-Linter Markdown summary
         run: |
-          OUTPUT_DIR="super-linter-output/super-linter"
+          OUTPUT_DIR="super-linter-output/super-linter/"
           MDREPORT="super-linter-report.md"
           echo "# Super-Linter Results" > "$MDREPORT"
           echo "| Linter | Status |" >> "$MDREPORT"
@@ -36,10 +36,14 @@ jobs:
               echo "| $linter | ❌ Failed |" >> "$MDREPORT"
               errfile="$OUTPUT_DIR/super-linter-parallel-stderr-$linter"
               if [ -f "$errfile" ]; then
-                echo "#### $linter errors" >> "$MDREPORT"
+                echo "<details><summary>$linter errors</summary>" >> "$MDREPORT"
+                echo '' >> "$MDREPORT"
                 echo '```' >> "$MDREPORT"
-                cat "$errfile" >> "$MDREPORT"
+                # Remove ANSI color codes
+                sed 's/\x1b\[[0-9;]*m//g' "$errfile" >> "$MDREPORT"
                 echo '```' >> "$MDREPORT"
+                echo "</details>" >> "$MDREPORT"
+                echo '' >> "$MDREPORT"
               fi
             fi
           done
