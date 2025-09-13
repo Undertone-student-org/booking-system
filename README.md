@@ -6,98 +6,88 @@
 |--------|--------|
 | DOCKERFILE_HADOLINT | ✅ Passed |
 | GITLEAKS | ✅ Passed |
-| GOOGLE_JAVA_FORMAT | ❌ Failed |
 | JAVA | ❌ Failed |
 | JSON | ✅ Passed |
 | TRIVY | ❌ Failed |
 | VUE | ✅ Passed |
 | YAML | ✅ Passed |
-<details><summary>DOCKERFILE_HADOLINT details</summary>
+<details><summary>✅ DOCKERFILE_HADOLINT details</summary>
 </details>
-<details><summary>GITLEAKS details</summary>
+<details><summary>✅ GITLEAKS details</summary>
 
 **Stderr:**
 ```
-1:54AM INF scanned ~2807 bytes (2.81 KB) in 89.2ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~329 bytes (329 bytes) in 95.7ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~3492 bytes (3.49 KB) in 115ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~4109 bytes (4.11 KB) in 73.2ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~116 bytes (116 bytes) in 89ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~306 bytes (306 bytes) in 93.7ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~1414 bytes (1.41 KB) in 78.1ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~4297 bytes (4.30 KB) in 129ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~314 bytes (314 bytes) in 92.7ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~1054 bytes (1.05 KB) in 84.2ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~0 bytes (0) in 94.8ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~480 bytes (480 bytes) in 94.8ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~322 bytes (322 bytes) in 90ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~1254 bytes (1.25 KB) in 94.6ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~528 bytes (528 bytes) in 74ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~1977 bytes (1.98 KB) in 85.7ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~879 bytes (879 bytes) in 89.3ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~1066 bytes (1.07 KB) in 89.1ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~288 bytes (288 bytes) in 76.1ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~4286 bytes (4.29 KB) in 109ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~913 bytes (913 bytes) in 130ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~825 bytes (825 bytes) in 78.1ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~3997 bytes (4 KB) in 175ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~266 bytes (266 bytes) in 82ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~2067 bytes (2.07 KB) in 94.8ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~399 bytes (399 bytes) in 110ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~379 bytes (379 bytes) in 107ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~0 bytes (0) in 101ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~70 bytes (70 bytes) in 68.5ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~55 bytes (55 bytes) in 99.3ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~492 bytes (492 bytes) in 118ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~700 bytes (700 bytes) in 97.2ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~317 bytes (317 bytes) in 79.4ms
-1:54AM INF no leaks found
-1:54AM INF scanned ~515 bytes (515 bytes) in 63.7ms
-1:54AM INF no leaks found
+2:04AM INF scanned ~2807 bytes (2.81 KB) in 107ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~329 bytes (329 bytes) in 90.4ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~3492 bytes (3.49 KB) in 90.9ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~4109 bytes (4.11 KB) in 125ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~116 bytes (116 bytes) in 98.2ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~306 bytes (306 bytes) in 109ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~1414 bytes (1.41 KB) in 88.7ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~4365 bytes (4.36 KB) in 89.3ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~314 bytes (314 bytes) in 106ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~1054 bytes (1.05 KB) in 99.6ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~0 bytes (0) in 98.2ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~480 bytes (480 bytes) in 107ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~322 bytes (322 bytes) in 84.6ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~1254 bytes (1.25 KB) in 99.3ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~528 bytes (528 bytes) in 94.3ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~1977 bytes (1.98 KB) in 102ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~879 bytes (879 bytes) in 86.5ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~1066 bytes (1.07 KB) in 115ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~288 bytes (288 bytes) in 68.2ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~4286 bytes (4.29 KB) in 91.4ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~913 bytes (913 bytes) in 89.5ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~825 bytes (825 bytes) in 78.8ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~27330 bytes (27.33 KB) in 110ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~266 bytes (266 bytes) in 97ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~2067 bytes (2.07 KB) in 115ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~399 bytes (399 bytes) in 75.3ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~379 bytes (379 bytes) in 91.4ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~0 bytes (0) in 57.3ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~55 bytes (55 bytes) in 103ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~70 bytes (70 bytes) in 101ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~492 bytes (492 bytes) in 125ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~700 bytes (700 bytes) in 93.7ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~317 bytes (317 bytes) in 81.7ms
+2:04AM INF no leaks found
+2:04AM INF scanned ~515 bytes (515 bytes) in 101ms
+2:04AM INF no leaks found
 ```
 </details>
-<details><summary>GOOGLE_JAVA_FORMAT details</summary>
-
-**Stdout:**
-```
-/github/workspace/src/main/java/com/undertone/controllers/HelloController.java
-/github/workspace/src/main/java/com/undertone/controllers/IndexForwardController.java
-/github/workspace/src/main/java/com/undertone/undertoneApplication.java
-```
-</details>
-<details><summary>JAVA details</summary>
+<details><summary>❌ JAVA details</summary>
 
 **Stdout:**
 ```
@@ -121,9 +111,9 @@ Audit done.
 Checkstyle ends with 11 errors.
 ```
 </details>
-<details><summary>JSON details</summary>
+<details><summary>✅ JSON details</summary>
 </details>
-<details><summary>TRIVY details</summary>
+<details><summary>❌ TRIVY details</summary>
 
 **Stdout:**
 ```
@@ -189,24 +179,24 @@ See https://avd.aquasec.com/misconfig/ds026
 
 **Stderr:**
 ```
-2025-09-13T01:54:50Z	INFO	Loaded	file_path="/action/lib/.automation/trivy.yaml"
-2025-09-13T01:54:50Z	INFO	[vulndb] Need to update DB
-2025-09-13T01:54:50Z	INFO	[vulndb] Downloading vulnerability DB...
-2025-09-13T01:54:50Z	INFO	[vulndb] Downloading artifact...	repo="mirror.gcr.io/aquasec/trivy-db:2"
-32.59 MiB / 70.35 MiB [---------------------------->________________________________] 46.33% ? p/s ?70.35 MiB / 70.35 MiB [----------------------------------------------------------->] 100.00% ? p/s ?70.35 MiB / 70.35 MiB [----------------------------------------------------------->] 100.00% ? p/s ?70.35 MiB / 70.35 MiB [---------------------------------------------->] 100.00% 62.88 MiB p/s ETA 0s70.35 MiB / 70.35 MiB [---------------------------------------------->] 100.00% 62.88 MiB p/s ETA 0s70.35 MiB / 70.35 MiB [---------------------------------------------->] 100.00% 62.88 MiB p/s ETA 0s70.35 MiB / 70.35 MiB [---------------------------------------------->] 100.00% 58.82 MiB p/s ETA 0s70.35 MiB / 70.35 MiB [---------------------------------------------->] 100.00% 58.82 MiB p/s ETA 0s70.35 MiB / 70.35 MiB [---------------------------------------------->] 100.00% 58.82 MiB p/s ETA 0s70.35 MiB / 70.35 MiB [---------------------------------------------->] 100.00% 55.03 MiB p/s ETA 0s70.35 MiB / 70.35 MiB [---------------------------------------------->] 100.00% 55.03 MiB p/s ETA 0s70.35 MiB / 70.35 MiB [---------------------------------------------->] 100.00% 55.03 MiB p/s ETA 0s70.35 MiB / 70.35 MiB [-------------------------------------------------] 100.00% 30.30 MiB p/s 2.5s2025-09-13T01:54:54Z	INFO	[vulndb] Artifact successfully downloaded	repo="mirror.gcr.io/aquasec/trivy-db:2"
-2025-09-13T01:54:54Z	INFO	[vuln] Vulnerability scanning is enabled
-2025-09-13T01:54:54Z	INFO	[misconfig] Misconfiguration scanning is enabled
-2025-09-13T01:54:54Z	INFO	[misconfig] Need to update the checks bundle
-2025-09-13T01:54:54Z	INFO	[misconfig] Downloading the checks bundle...
-165.20 KiB / 165.20 KiB [---------------------------------------------------------] 100.00% ? p/s 0s2025-09-13T01:54:56Z	INFO	[secret] Secret scanning is enabled
-2025-09-13T01:54:56Z	INFO	[secret] If your scanning is slow, please try '--scanners vuln' to disable secret scanning
-2025-09-13T01:54:56Z	INFO	[secret] Please see also https://trivy.dev/v0.65/docs/scanner/secret#recommendation for faster secret detection
-2025-09-13T01:54:57Z	INFO	[npm] To collect the license information of packages, "npm install" needs to be performed beforehand	dir="front-end-app/node_modules"
-2025-09-13T01:54:57Z	INFO	Suppressing dependencies for development and testing. To display them, try the '--include-dev-deps' flag.
-2025-09-13T01:54:57Z	INFO	Number of language-specific files	num=2
-2025-09-13T01:54:57Z	INFO	[npm] Detecting vulnerabilities...
-2025-09-13T01:54:57Z	INFO	[pom] Detecting vulnerabilities...
-2025-09-13T01:54:57Z	INFO	Detected config files	num=1
+2025-09-13T02:04:37Z	INFO	Loaded	file_path="/action/lib/.automation/trivy.yaml"
+2025-09-13T02:04:37Z	INFO	[vulndb] Need to update DB
+2025-09-13T02:04:37Z	INFO	[vulndb] Downloading vulnerability DB...
+2025-09-13T02:04:37Z	INFO	[vulndb] Downloading artifact...	repo="mirror.gcr.io/aquasec/trivy-db:2"
+39.12 MiB / 70.35 MiB [--------------------------------->___________________________] 55.62% ? p/s ?70.35 MiB / 70.35 MiB [----------------------------------------------------------->] 100.00% ? p/s ?70.35 MiB / 70.35 MiB [----------------------------------------------------------->] 100.00% ? p/s ?70.35 MiB / 70.35 MiB [---------------------------------------------->] 100.00% 52.38 MiB p/s ETA 0s70.35 MiB / 70.35 MiB [---------------------------------------------->] 100.00% 52.38 MiB p/s ETA 0s70.35 MiB / 70.35 MiB [---------------------------------------------->] 100.00% 52.38 MiB p/s ETA 0s70.35 MiB / 70.35 MiB [---------------------------------------------->] 100.00% 49.00 MiB p/s ETA 0s70.35 MiB / 70.35 MiB [---------------------------------------------->] 100.00% 49.00 MiB p/s ETA 0s70.35 MiB / 70.35 MiB [---------------------------------------------->] 100.00% 49.00 MiB p/s ETA 0s70.35 MiB / 70.35 MiB [---------------------------------------------->] 100.00% 45.84 MiB p/s ETA 0s70.35 MiB / 70.35 MiB [---------------------------------------------->] 100.00% 45.84 MiB p/s ETA 0s70.35 MiB / 70.35 MiB [---------------------------------------------->] 100.00% 45.84 MiB p/s ETA 0s70.35 MiB / 70.35 MiB [-------------------------------------------------] 100.00% 29.62 MiB p/s 2.6s2025-09-13T02:04:41Z	INFO	[vulndb] Artifact successfully downloaded	repo="mirror.gcr.io/aquasec/trivy-db:2"
+2025-09-13T02:04:41Z	INFO	[vuln] Vulnerability scanning is enabled
+2025-09-13T02:04:41Z	INFO	[misconfig] Misconfiguration scanning is enabled
+2025-09-13T02:04:41Z	INFO	[misconfig] Need to update the checks bundle
+2025-09-13T02:04:41Z	INFO	[misconfig] Downloading the checks bundle...
+165.20 KiB / 165.20 KiB [---------------------------------------------------------] 100.00% ? p/s 0s2025-09-13T02:04:44Z	INFO	[secret] Secret scanning is enabled
+2025-09-13T02:04:44Z	INFO	[secret] If your scanning is slow, please try '--scanners vuln' to disable secret scanning
+2025-09-13T02:04:44Z	INFO	[secret] Please see also https://trivy.dev/v0.65/docs/scanner/secret#recommendation for faster secret detection
+2025-09-13T02:04:44Z	INFO	[npm] To collect the license information of packages, "npm install" needs to be performed beforehand	dir="front-end-app/node_modules"
+2025-09-13T02:04:44Z	INFO	Suppressing dependencies for development and testing. To display them, try the '--include-dev-deps' flag.
+2025-09-13T02:04:44Z	INFO	Number of language-specific files	num=2
+2025-09-13T02:04:44Z	INFO	[npm] Detecting vulnerabilities...
+2025-09-13T02:04:44Z	INFO	[pom] Detecting vulnerabilities...
+2025-09-13T02:04:44Z	INFO	Detected config files	num=1
 
 📣 Notices:
   - Version 0.66.0 of Trivy is now available, current version is 0.65.0
@@ -214,7 +204,7 @@ See https://avd.aquasec.com/misconfig/ds026
 To suppress version checks, run Trivy scans with the --skip-version-check flag
 ```
 </details>
-<details><summary>VUE details</summary>
+<details><summary>✅ VUE details</summary>
 
 **Stdout:**
 ```
@@ -321,7 +311,7 @@ To suppress version checks, run Trivy scans with the --skip-version-check flag
   0 errors and 50 warnings potentially fixable with the `--fix` option.
 ```
 </details>
-<details><summary>YAML details</summary>
+<details><summary>✅ YAML details</summary>
 
 **Stdout:**
 ```
@@ -333,12 +323,12 @@ To suppress version checks, run Trivy scans with the --skip-version-check flag
 /github/workspace/.github/workflows/lint.yml:14:13: [warning] wrong indentation: expected 10 but found 12 (indentation)
 /github/workspace/.github/workflows/lint.yml:63:81: [warning] line too long (83 > 80 characters) (line-length)
 /github/workspace/.github/workflows/lint.yml:64:81: [warning] line too long (95 > 80 characters) (line-length)
-/github/workspace/.github/workflows/lint.yml:66:81: [warning] line too long (106 > 80 characters) (line-length)
-/github/workspace/.github/workflows/lint.yml:72:81: [warning] line too long (107 > 80 characters) (line-length)
-/github/workspace/.github/workflows/lint.yml:75:81: [warning] line too long (107 > 80 characters) (line-length)
-/github/workspace/.github/workflows/lint.yml:87:81: [warning] line too long (90 > 80 characters) (line-length)
-/github/workspace/.github/workflows/lint.yml:98:81: [warning] line too long (87 > 80 characters) (line-length)
-/github/workspace/.github/workflows/lint.yml:102:81: [warning] line too long (93 > 80 characters) (line-length)
+/github/workspace/.github/workflows/lint.yml:70:81: [warning] line too long (81 > 80 characters) (line-length)
+/github/workspace/.github/workflows/lint.yml:74:81: [warning] line too long (107 > 80 characters) (line-length)
+/github/workspace/.github/workflows/lint.yml:77:81: [warning] line too long (107 > 80 characters) (line-length)
+/github/workspace/.github/workflows/lint.yml:88:81: [warning] line too long (90 > 80 characters) (line-length)
+/github/workspace/.github/workflows/lint.yml:99:81: [warning] line too long (87 > 80 characters) (line-length)
+/github/workspace/.github/workflows/lint.yml:103:81: [warning] line too long (93 > 80 characters) (line-length)
 /github/workspace/compose.yml:1:1: [warning] too many blank lines (1 > 0) (empty-lines)
 /github/workspace/compose.yml:2:1: [warning] missing document start "---" (document-start)
 ```
