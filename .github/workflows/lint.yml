@@ -27,6 +27,7 @@ jobs:
           echo "# Super-Linter Results" > "$MDREPORT"
           echo "| Linter | Status |" >> "$MDREPORT"
           echo "|--------|--------|" >> "$MDREPORT"
+          ERRDETAILS=""
           for codefile in $OUTPUT_DIR/super-linter-parallel-command-exit-code-*; do
             linter=$(basename "$codefile" | sed 's/super-linter-parallel-command-exit-code-//')
             code=$(cat "$codefile")
@@ -36,18 +37,20 @@ jobs:
               echo "| $linter | ❌ Failed |" >> "$MDREPORT"
               errfile="$OUTPUT_DIR/super-linter-parallel-stderr-$linter"
               if [ -f "$errfile" ]; then
-                echo "<details><summary>$linter errors</summary>" >> "$MDREPORT"
-                echo '' >> "$MDREPORT"
-                echo '```' >> "$MDREPORT"
-                # Remove ANSI color codes
-                sed 's/\x1b\[[0-9;]*m//g' "$errfile" >> "$MDREPORT"
-                echo '```' >> "$MDREPORT"
-                echo "</details>" >> "$MDREPORT"
-                echo '' >> "$MDREPORT"
+                ERRDETAILS="$ERRDETAILS
+          <details><summary>$linter errors</summary>
+
+          \`\`\`
+          $(sed 's/\x1b\[[0-9;]*m//g' "$errfile")
+          \`\`\`
+          </details>
+
+          "
               fi
             fi
           done
-          echo "" >> "$MDREPORT"
+          # Add error details after the table
+          echo "$ERRDETAILS" >> "$MDREPORT"
       - name: Insert Super-Linter report into README.md and push
         run: |
           # Insert the linter report between the markers
