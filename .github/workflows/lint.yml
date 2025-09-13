@@ -1,7 +1,7 @@
 name: Lint Codebase
 permissions:
   contents: write
-  statuses: write # 
+  statuses: write 
 on:
     workflow_call:
 jobs:
@@ -48,10 +48,33 @@ jobs:
             fi
           done
           echo "" >> "$MDREPORT"
-      - name: Upload Super-Linter Markdown report
-        uses: actions/upload-artifact@v4
-        with:
-          name: super-linter-report
-          path: super-linter-report.md
-          if-no-files-found: error
-          retention-days: 7
+      - name: Insert Super-Linter report into README.md and push
+        run: |
+          # Insert the linter report between the markers
+          awk -v report="$(cat super-linter-report.md)" '
+            BEGIN {in_section=0}
+            /<!-- SUPER_LINTER_REPORT_START -->/ {print; print report; in_section=1; next}
+            /<!-- SUPER_LINTER_REPORT_END -->/ {in_section=0}
+            !in_section {print}
+          ' README.md > README.new.md
+          mv README.new.md README.md
+
+          # Get current branch name
+          branch="$(git rev-parse --abbrev-ref HEAD)"
+
+          # Configure git
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Add and commit README.md
+          git add README.md
+          git commit -m "Update Super-Linter report [skip ci]" || echo "No changes to commit"
+
+          # Push logic
+          if [ "$branch" = "production" ]; then
+            echo "Not pushing to production branch."
+          elif [ "$branch" = "pre-production" ]; then
+            git push --force
+          else
+            git push
+          fi
