@@ -22,7 +22,7 @@ jobs:
             SAVE_SUPER_LINTER_OUTPUT: true
       - name: Generate Super-Linter Markdown summary
         run: |
-          OUTPUT_DIR="super-linter-output"
+          OUTPUT_DIR="super-linter-output/super-linter"
           MDREPORT="super-linter-report.md"
           echo "# Super-Linter Results" > "$MDREPORT"
           echo "| Linter | Status |" >> "$MDREPORT"
