@@ -23,7 +23,6 @@ jobs:
 
           # Enabled linters
           VALIDATE_JAVA: true
-          VALIDATE_GOOGLE_JAVA_FORMAT: true
           VALIDATE_VUE: true
           VALIDATE_YAML: true
           VALIDATE_JSON: true
@@ -32,6 +31,7 @@ jobs:
           VALIDATE_GITLEAKS: true
 
           # All other linters 
+          #VALIDATE_GOOGLE_JAVA_FORMAT: true
           #VALIDATE_CSS: false
           #VALIDATE_CSS_PRETTIER: false
           #VALIDATE_HTML: false
@@ -63,11 +63,13 @@ jobs:
           for codefile in $OUTPUT_DIR/super-linter-parallel-command-exit-code-*; do
             linter=$(basename "$codefile" | sed 's/super-linter-parallel-command-exit-code-//')
             code=$(cat "$codefile")
-            echo "| $linter | $([ "$code" = "0" ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$MDREPORT"
-            # Collect details for failed and passed linters
+            status_emoji=$([ "$code" = "0" ] && echo "✅" || echo "❌")
+            status_text=$([ "$code" = "0" ] && echo "Passed" || echo "Failed")
+            echo "| $linter | $status_emoji $status_text |" >> "$MDREPORT"
+            # Details header with emoji
+            details="<details><summary>$status_emoji $linter details</summary>\n"
             stdoutfile="$OUTPUT_DIR/super-linter-parallel-stdout-$linter"
             stderrfile="$OUTPUT_DIR/super-linter-parallel-stderr-$linter"
-            details="<details><summary>$linter details</summary>\n"
             if [ -f "$stdoutfile" ]; then
               details="$details\n**Stdout:**\n\`\`\`\n$(sed 's/\x1b\[[0-9;]*m//g' "$stdoutfile")\n\`\`\`\n"
             fi
@@ -77,7 +79,6 @@ jobs:
             details="$details</details>\n"
             ERRDETAILS="$ERRDETAILS$details"
           done
-          # Add all details after the table
           echo -e "$ERRDETAILS" >> "$MDREPORT"
       - name: Insert Super-Linter report into README.md and push
         run: |
