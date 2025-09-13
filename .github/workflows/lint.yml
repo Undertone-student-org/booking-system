@@ -12,19 +12,42 @@ jobs:
         uses: actions/checkout@v3
         with:
             fetch-depth: 0
-      - name: Run Super-Linter (slim)
+      - name: Run Super-Linter
         uses: super-linter/super-linter@v8
         env:
             VALIDATE_ALL_CODEBASE: true
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            # DISABLE_GITHUB_STATUS: true
             OUTPUT_DETAILS: detailed
             DISABLE_ERRORS: true
             SAVE_SUPER_LINTER_OUTPUT: true
-      - name: Upload Super-Linter output file
+      - name: Generate Super-Linter Markdown summary
+        run: |
+          OUTPUT_DIR="super-linter-output"
+          MDREPORT="super-linter-report.md"
+          echo "# Super-Linter Results" > "$MDREPORT"
+          echo "| Linter | Status |" >> "$MDREPORT"
+          echo "|--------|--------|" >> "$MDREPORT"
+          for codefile in $OUTPUT_DIR/super-linter-parallel-command-exit-code-*; do
+            linter=$(basename "$codefile" | sed 's/super-linter-parallel-command-exit-code-//')
+            code=$(cat "$codefile")
+            if [ "$code" = "0" ]; then
+              echo "| $linter | ✅ Passed |" >> "$MDREPORT"
+            else
+              echo "| $linter | ❌ Failed |" >> "$MDREPORT"
+              errfile="$OUTPUT_DIR/super-linter-parallel-stderr-$linter"
+              if [ -f "$errfile" ]; then
+                echo "#### $linter errors" >> "$MDREPORT"
+                echo '```' >> "$MDREPORT"
+                cat "$errfile" >> "$MDREPORT"
+                echo '```' >> "$MDREPORT"
+              fi
+            fi
+          done
+          echo "" >> "$MDREPORT"
+      - name: Upload Super-Linter Markdown report
         uses: actions/upload-artifact@v4
         with:
-            name: super-linter-output
-            path: ./super-linter-output/super-linter
-            if-no-files-found: error
-            retention-days: 7
+          name: super-linter-report
+          path: super-linter-report.md
+          if-no-files-found: error
+          retention-days: 7
