@@ -15,13 +15,13 @@ jobs:
       - name: Run Super-Linter
         uses: super-linter/super-linter@v8
         env:
-          VALIDATE_ALL_CODEBASE: true         # Run on the whole repo
+          VALIDATE_ALL_CODEBASE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OUTPUT_DETAILS: detailed            # Optional: detailed output
-          DISABLE_ERRORS: true                # Prevents build failure
-          SAVE_SUPER_LINTER_OUTPUT: true     # Optional: keep logs
+          OUTPUT_DETAILS: detailed            
+          DISABLE_ERRORS: true                
+          SAVE_SUPER_LINTER_OUTPUT: true     
 
-          # Enabled linters for your project
+          # Enabled linters
           VALIDATE_JAVA: true
           VALIDATE_GOOGLE_JAVA_FORMAT: true
           VALIDATE_VUE: true
@@ -31,25 +31,25 @@ jobs:
           VALIDATE_TRIVY: true
           VALIDATE_GITLEAKS: true
 
-          # All other linters are implicitly disabled
-          VALIDATE_CSS: false
-          VALIDATE_CSS_PRETTIER: false
-          VALIDATE_HTML: false
-          VALIDATE_HTML_PRETTIER: false
-          VALIDATE_JAVASCRIPT_ES: false
-          VALIDATE_JAVASCRIPT_PRETTIER: false
-          VALIDATE_JSCPD: false
-          VALIDATE_MARKDOWN: false
-          VALIDATE_MARKDOWN_PRETTIER: false
-          VALIDATE_NATURAL_LANGUAGE: false
-          VALIDATE_YAML_PRETTIER: false
-          VALIDATE_JSON_PRETTIER: false
-          VALIDATE_VUE_PRETTIER: false
-          VALIDATE_GIT_MERGE_CONFLICT_MARKERS: false
-          VALIDATE_GITHUB_ACTIONS: false
-          VALIDATE_GITHUB_ACTIONS_ZIZMOR: false
-          VALIDATE_CHECKOV: false
-          VALIDATE_XML: false
+          # All other linters 
+          #VALIDATE_CSS: false
+          #VALIDATE_CSS_PRETTIER: false
+          #VALIDATE_HTML: false
+          #VALIDATE_HTML_PRETTIER: false
+          #VALIDATE_JAVASCRIPT_ES: false
+          #VALIDATE_JAVASCRIPT_PRETTIER: false
+          #VALIDATE_JSCPD: false
+          #VALIDATE_MARKDOWN: false
+          #VALIDATE_MARKDOWN_PRETTIER: false
+          #VALIDATE_NATURAL_LANGUAGE: false
+          #VALIDATE_YAML_PRETTIER: false
+          #VALIDATE_JSON_PRETTIER: false
+          #VALIDATE_VUE_PRETTIER: false
+          #VALIDATE_GIT_MERGE_CONFLICT_MARKERS: false
+          #VALIDATE_GITHUB_ACTIONS: false
+          #VALIDATE_GITHUB_ACTIONS_ZIZMOR: false
+          #VALIDATE_CHECKOV: false
+          #VALIDATE_XML: false
 
 
       - name: Generate Clean Super-Linter Markdown summary
