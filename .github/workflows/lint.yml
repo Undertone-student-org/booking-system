@@ -52,7 +52,7 @@ jobs:
           #VALIDATE_XML: false
 
 
-      - name: Generate Clean Super-Linter Markdown summary
+      - name: Generate Detailed Super-Linter Markdown summary
         run: |
           OUTPUT_DIR="super-linter-output/super-linter/"
           MDREPORT="super-linter-report.md"
@@ -63,26 +63,22 @@ jobs:
           for codefile in $OUTPUT_DIR/super-linter-parallel-command-exit-code-*; do
             linter=$(basename "$codefile" | sed 's/super-linter-parallel-command-exit-code-//')
             code=$(cat "$codefile")
-            if [ "$code" = "0" ]; then
-              echo "| $linter | ✅ Passed |" >> "$MDREPORT"
-            else
-              echo "| $linter | ❌ Failed |" >> "$MDREPORT"
-              errfile="$OUTPUT_DIR/super-linter-parallel-stderr-$linter"
-              if [ -f "$errfile" ]; then
-                ERRDETAILS="$ERRDETAILS
-          <details><summary>$linter errors</summary>
-
-          \`\`\`
-          $(sed 's/\x1b\[[0-9;]*m//g' "$errfile")
-          \`\`\`
-          </details>
-
-          "
-              fi
+            echo "| $linter | $([ "$code" = "0" ] && echo '✅ Passed' || echo '❌ Failed') |" >> "$MDREPORT"
+            # Collect details for failed and passed linters
+            stdoutfile="$OUTPUT_DIR/super-linter-parallel-stdout-$linter"
+            stderrfile="$OUTPUT_DIR/super-linter-parallel-stderr-$linter"
+            details="<details><summary>$linter details</summary>\n"
+            if [ -f "$stdoutfile" ]; then
+              details="$details\n**Stdout:**\n\`\`\`\n$(sed 's/\x1b\[[0-9;]*m//g' "$stdoutfile")\n\`\`\`\n"
             fi
+            if [ -f "$stderrfile" ]; then
+              details="$details\n**Stderr:**\n\`\`\`\n$(sed 's/\x1b\[[0-9;]*m//g' "$stderrfile")\n\`\`\`\n"
+            fi
+            details="$details</details>\n"
+            ERRDETAILS="$ERRDETAILS$details"
           done
-          # Add error details after the table
-          echo "$ERRDETAILS" >> "$MDREPORT"
+          # Add all details after the table
+          echo -e "$ERRDETAILS" >> "$MDREPORT"
       - name: Insert Super-Linter report into README.md and push
         run: |
           # Insert the linter report between the markers
