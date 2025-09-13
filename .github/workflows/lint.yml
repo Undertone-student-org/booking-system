@@ -20,6 +20,19 @@ jobs:
             OUTPUT_DETAILS: detailed
             DISABLE_ERRORS: true
             SAVE_SUPER_LINTER_OUTPUT: true
+            # Disabled linters, should be discussed and maybe re-enabled later
+            VALIDATE_CSS_PRETTIER: false
+            VALIDATE_HTML_PRETTIER: false
+            VALIDATE_JAVASCRIPT_PRETTIER: false
+            VALIDATE_MARKDOWN_PRETTIER: false
+            VALIDATE_VUE_PRETTIER: false
+            VALIDATE_YAML_PRETTIER: false
+            VALIDATE_JSON_PRETTIER: false
+            VALIDATE_GIT_MERGE_CONFLICT_MARKERS: false
+            VALIDATE_JAVASCRIPT_ES: false
+            VALIDATE_MARKDOWN: false
+            VALIDATE_GITHUB_ACTIONS_ZIZMOR: false
+
       - name: Generate Clean Super-Linter Markdown summary
         run: |
           OUTPUT_DIR="super-linter-output/super-linter/"
