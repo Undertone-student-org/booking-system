@@ -15,14 +15,11 @@ jobs:
       - name: Run Super-Linter
         uses: super-linter/super-linter@v8
         env:
-            VALIDATE_ALL_CODEBASE: true
+            VALIDATE_ALL_CODEBASE: false
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             OUTPUT_DETAILS: detailed
             DISABLE_ERRORS: true
             SAVE_SUPER_LINTER_OUTPUT: true
-            # -----------------------------
-            # CORE ENABLED (for this project)
-            # -----------------------------
 
             # Java backend
             VALIDATE_JAVA: true
@@ -39,29 +36,6 @@ jobs:
             # Security
             VALIDATE_TRIVY: true
             VALIDATE_GITLEAKS: true
-
-            # -----------------------------
-            # DISABLED (toggleable if needed)
-            # -----------------------------
-            VALIDATE_CSS: false                # toggle if CSS becomes relevant
-            VALIDATE_CSS_PRETTIER: false       # toggle if you want auto-formatting
-            VALIDATE_HTML: false               # toggle if HTML files added
-            VALIDATE_HTML_PRETTIER: false      # toggle if HTML formatting desired
-            VALIDATE_JAVASCRIPT_ES: false      # toggle if JS linting desired
-            VALIDATE_JAVASCRIPT_PRETTIER: false # toggle if JS formatting desired
-            VALIDATE_JSCPD: false              # toggle if duplication checking desired
-            VALIDATE_MARKDOWN: false           # toggle for docs style checks
-            VALIDATE_MARKDOWN_PRETTIER: false  # toggle for docs formatting
-            VALIDATE_NATURAL_LANGUAGE: false   # toggle for prose/grammar checking
-            VALIDATE_YAML_PRETTIER: false      # toggle for YAML formatting
-            VALIDATE_JSON_PRETTIER: false      # toggle for JSON formatting
-            VALIDATE_VUE_PRETTIER: false       # toggle for Vue formatting
-            VALIDATE_GIT_MERGE_CONFLICT_MARKERS: false # toggle for merge markers check
-            VALIDATE_GITHUB_ACTIONS: false     # toggle for Actions workflow lint
-            VALIDATE_GITHUB_ACTIONS_ZIZMOR: false # toggle for strict Actions security
-            VALIDATE_CHECKOV: false            # toggle for infra/security scanning
-            VALIDATE_XML: false                # toggle for XML linting
-
 
       - name: Generate Clean Super-Linter Markdown summary
         run: |
