@@ -21,6 +21,10 @@ jobs:
             OUTPUT_DETAILS: detailed
             DISABLE_ERRORS: true
             SAVE_SUPER_LINTER_OUTPUT: true
+      - name: Echo contents of Super-Linter file
+        run: |
+            echo "Contents of /home/runner/work/_actions/github/super-linter:"
+            cat /home/runner/work/_actions/github/super-linter || echo "File not found"
       - name: Debug - Find Super-Linter output file
         run: |
           echo "Searching for the 'super-linter' directory across all directories..."
