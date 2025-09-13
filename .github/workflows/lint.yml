@@ -21,7 +21,11 @@ jobs:
             OUTPUT_DETAILS: detailed
             DISABLE_ERRORS: true
             SAVE_SUPER_LINTER_OUTPUT: true
-            SUPER_LINTER_OUTPUT_DIRECTORY_NAME: "."
+      - name: Debug - Find Super-Linter output file
+        run: |
+          echo "Searching for the 'super-linter' directory across all directories..."
+          find / -name "super-linter" 2>/dev/null
+          echo "Search complete."
       - name: Upload Super-Linter output file
         uses: actions/upload-artifact@v4
         with:
