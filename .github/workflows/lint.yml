@@ -13,7 +13,7 @@ jobs:
         with:
             fetch-depth: 0
       - name: Run Super-Linter (slim)
-        uses: github/super-linter/slim@v6
+        uses: super-linter/super-linter@v8
         env:
             VALIDATE_ALL_CODEBASE: true
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -21,19 +21,10 @@ jobs:
             OUTPUT_DETAILS: detailed
             DISABLE_ERRORS: true
             SAVE_SUPER_LINTER_OUTPUT: true
-      - name: Echo contents of Super-Linter file
-        run: |
-            echo "Contents of /home/runner/work/_actions/github/super-linter:"
-            cat /home/runner/work/_actions/github/super-linter || echo "File not found"
-      - name: Debug - Find Super-Linter output file
-        run: |
-          echo "Searching for the 'super-linter' directory across all directories..."
-          find / -name "super-linter" 2>/dev/null
-          echo "Search complete."
       - name: Upload Super-Linter output file
         uses: actions/upload-artifact@v4
         with:
             name: super-linter-output
-            path: ./super-linter
+            path: ./super-linter-output/super-linter
             if-no-files-found: error
             retention-days: 7
